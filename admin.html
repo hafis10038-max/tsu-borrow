@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard ผู้ดูแลระบบ | TSU</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>if(localStorage.getItem('tsu_auth') !== 'TSU_ADMIN_TOKEN') window.location.href = 'login.html';</script>
+</head>
+<body>
+    <div class="tsu-hero-bg"></div>
+    <nav class="navbar">
+        <div class="nav-brand"><i class="fas fa-cogs logo-icon"></i> <span>Admin Dashboard</span></div>
+        <div>
+            <a href="index.html" class="admin-btn" style="margin-right: 10px;"><i class="fas fa-home"></i> หน้าแรก</a>
+            <a href="#" onclick="logout()" class="admin-btn" style="background: #d9534f;"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+        </div>
+    </nav>
+
+    <div class="admin-main-container">
+        <!-- จัดการคลังอุปกรณ์ -->
+        <div class="section-box slide-up" style="margin-bottom: 30px;">
+            <div class="box-header flex-between">
+                <div>
+                    <h2>จัดการคลังอุปกรณ์สำนักงาน</h2>
+                    <span>เพิ่มหรือลบรายการของที่มีให้ยืมในระบบ</span>
+                </div>
+                <button onclick="openAddItemModal()" class="btn-submit" style="width: auto; padding: 10px 20px;"><i class="fas fa-plus"></i> เพิ่มอุปกรณ์ใหม่</button>
+            </div>
+            <div class="table-wrapper">
+                <table id="inventoryTable">
+                    <thead>
+                        <tr>
+                            <th>ชื่ออุปกรณ์</th>
+                            <th>รายละเอียด</th>
+                            <th style="width: 100px; text-align: center;">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- รายการคนยืม -->
+        <div class="section-box slide-up">
+            <div class="box-header">
+                <h2>ประวัติและสถานะการยืม-คืน</h2>
+                <span>รายการที่กำลังยืมและเลยกำหนด</span>
+            </div>
+            <div class="table-wrapper">
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>ผู้ยืม / คณะ</th>
+                            <th>อุปกรณ์</th>
+                            <th>ยืม / กำหนดคืน</th>
+                            <th>รูปหลักฐาน</th>
+                            <th>สถานะ</th>
+                            <th>จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
