@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบยืมของ ฝ่ายกิจการนิสิต สำนักงานมหาวิทยาลัย</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="tsu-hero-bg"></div>
+    <nav class="navbar">
+        <div class="nav-brand"><i class="fas fa-university logo-icon"></i> <span>TSU Borrowing System</span></div>
+        <a href="login.html" class="admin-btn"><i class="fas fa-user-shield"></i> เจ้าหน้าที่</a>
+    </nav>
+
+    <header class="hero-section fade-in">
+        <div class="tsu-badge">OFFICE OF THE UNIVERSITY</div>
+        <h1>ระบบยืมของ ฝ่ายกิจการนิสิต สำนักงานมหาวิทยาลัย</h1>
+        <p>บริการยืมพัสดุและอุปกรณ์สำนักงานออนไลน์</p>
+    </header>
+
+    <div class="main-container">
+        <!-- รายการของ -->
+        <div class="section-box slide-up">
+            <div class="box-header">
+                <h2><i class="fas fa-list"></i> รายการอุปกรณ์ที่มีให้ยืม</h2>
+            </div>
+            <div id="itemGrid" class="item-grid"></div>
+        </div>
+
+        <!-- ฟอร์มยืมของ -->
+        <div class="section-box slide-up" id="borrowSection" style="display:none;">
+            <div class="box-header">
+                <h2>แบบฟอร์มขอยืมอุปกรณ์</h2>
+                <span id="selectedItemTitle" class="highlight-item">กำลังเลือก: -</span>
+            </div>
+            <form id="borrowForm" class="styled-form">
+                <input type="hidden" id="selectedItemName">
+                
+                <!-- ช่องกรอกรายการอื่นๆ จะซ่อนไว้ และโผล่มาเมื่อกดเลือกการ์ด 'อื่นๆ' -->
+                <div id="otherItemContainer" style="display: none; padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px;">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <label for="otherItemName">ระบุชื่ออุปกรณ์ที่ต้องการยืม <span style="color:red">*</span></label>
+                        <input type="text" id="otherItemName" placeholder="พิมพ์ชื่ออุปกรณ์ที่ต้องการ...">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <label for="otherItemQty">จำนวนที่ต้องการยืม <span style="color:red">*</span></label>
+                        <input type="number" id="otherItemQty" placeholder="เช่น 1, 2, 5" min="1">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>ชื่อ-สกุล <span style="color:red">*</span></label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="input-group">
+                    <label>อีเมล <span style="color:red">*</span></label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="row-group">
+                    <div class="input-group">
+                        <!-- คณะ/หน่วยงาน (บังคับพิมพ์เอง) -->
+                        <label for="faculty">คณะ / หน่วยงาน <span style="color:red">*</span></label>
+                        <input type="text" id="faculty" required placeholder="โปรดพิมพ์ชื่อคณะหรือหน่วยงาน">
+                    </div>
+                    <div class="input-group">
+                        <!-- รหัสนิสิต (ไม่บังคับ) -->
+                        <label for="studentId">รหัสนิสิต / รหัสบุคลากร (เฉพาะนิสิต)</label>
+                        <input type="text" id="studentId" placeholder="เว้นว่างได้หากไม่มี">
+                    </div>
+                </div>
+                <div class="row-group">
+                    <div class="input-group">
+                        <label>หมายเลขโทรศัพท์ <span style="color:red">*</span></label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="input-group">
+                        <label>กำหนดคืน <span style="color:red">*</span></label>
+                        <input type="date" id="returnDate" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>ภาพถ่ายหลักฐาน (ถ่ายปุ๊บโหลดปั๊บ แบบ Google Form) <span style="color:red">*</span></label>
+                    <input type="file" id="itemPhoto" accept="image/*" required class="file-input">
+                    <div id="photoPreviewContainer" style="display:none; text-align:center; margin-top:10px;">
+                        <img id="photoPreview" style="max-height: 150px; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="cancelBorrow()">ยกเลิก</button>
+                    <button type="submit" class="btn-submit">ส่งคำขอยืม</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
